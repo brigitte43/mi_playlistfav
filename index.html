@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIBRA | Mi Playlist</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Iconos -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Tipografía -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <style>
+        :root {
+            --verde: #1ed760;
+            --fondo: #080b09;
+            --panel: #121713;
+            --texto: #f5f5f5;
+            --gris: #a5aaa6;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            margin: 0;
+            background: var(--fondo);
+            color: var(--texto);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .navbar {
+            background: rgba(8, 11, 9, .94);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid #252b26;
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-size: 1.5rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .navbar-brand span {
+            color: var(--verde);
+        }
+
+        .nav-link {
+            color: #d5d9d5 !important;
+            font-size: .85rem;
+            font-weight: 600;
+            transition: .25s;
+        }
+
+        .nav-link:hover {
+            color: var(--verde) !important;
+        }
+
+        .btn-verde {
+            background: var(--verde);
+            color: #071009;
+            border: none;
+            border-radius: 30px;
+            padding: 12px 23px;
+            font-weight: 800;
+            transition: .25s;
+        }
+
+        .btn-verde:hover {
+            background: #48f17e;
+            color: #071009;
+            transform: scale(1.04);
+        }
+
+        .btn-outline-light {
+            border-radius: 30px;
+            padding: 11px 21px;
+            font-weight: 700;
+        }
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+            padding: 95px 0 75px;
+            background:
+                radial-gradient(ellipse at 75% 15%,
+                    rgba(30, 215, 96, .23), transparent 38%),
+                radial-gradient(ellipse at 5% 90%,
+                    rgba(20, 100, 50, .19), transparent 40%),
+                #080b09;
+        }
+
+        .etiqueta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--verde);
+            background: rgba(30, 215, 96, .10);
+            border: 1px solid rgba(30, 215, 96, .25);
+            border-radius: 30px;
+            padding: 8px 14px;
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .hero h1 {
+            margin-top: 25px;
+            font-size: clamp(3.2rem, 8vw, 6.5rem);
+            font-weight: 900;
+            letter-spacing: -5px;
+            line-height: .99;
+        }
+
+        .hero h1 span {
+            color: var(--verde);
+        }
+
+        .hero p {
+            color: #b9c0ba;
+            max-width: 520px;
+            line-height: 1.9;
+        }
+
+        .hero-art {
+            position: relative;
+            max-width: 410px;
+            margin: 15px auto;
+            transform: rotate(3deg);
+            transition: .4s;
+        }
+
+        .hero-art:hover {
+            transform: rotate(0deg) scale(1.03);
+        }
+
+        .hero-art img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 24px;
+            box-shadow: 0 25px 70px #000a;
+        }
+
+        .art-label {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            padding: 18px;
+            border-radius: 16px;
+            background: rgba(0, 0, 0, .72);
+            backdrop-filter: blur(10px);
+        }
+
+        .section {
+            padding: 65px 0;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 900;
+            letter-spacing: -1.5px;
+        }
+
+        .section-subtitle {
+            color: var(--gris);
+            font-size: .9rem;
+        }
+
+        .artist-card {
+            display: block;
+            height: 100%;
+            padding: 17px;
+            color: white;
+            background: linear-gradient(145deg, #1a211c, #101310);
+            border: 1px solid #272e28;
+            border-radius: 20px;
+            transition: .3s;
+        }
+
+        .artist-card:hover {
+            color: white;
+            transform: translateY(-7px);
+            border-color: var(--verde);
+            box-shadow: 0 15px 35px #0005;
+        }
+
+        .artist-img {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 14px;
+            background: #222;
+        }
+
+        .artist-card h3 {
+            margin-top: 17px;
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .artist-card p {
+            margin-bottom: 12px;
+            color: var(--gris);
+            font-size: .8rem;
+        }
+
+        .mini-link {
+            color: var(--verde);
+            font-size: .82rem;
+            font-weight: 800;
+        }
+
+        .playlist-panel {
+            padding: 25px;
+            background: linear-gradient(135deg, #18271c, #111512 65%);
+            border: 1px solid #28352b;
+            border-radius: 24px;
+        }
+
+        .playlist-cover {
+            width: 100%;
+            max-width: 210px;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 12px 30px #0008;
+        }
+
+        .playlist-kicker {
+            color: var(--verde);
+            font-size: .72rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .track {
+            display: grid;
+            grid-template-columns: 35px 1fr 45px;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 10px;
+            border-radius: 12px;
+            transition: .2s;
+        }
+
+        .track:hover {
+            background: #1b211c;
+        }
+
+        .track-number {
+            color: #8d968e;
+            text-align: center;
+            font-size: .85rem;
+        }
+
+        .track-name {
+            color: white;
+            font-size: .9rem;
+            font-weight: 700;
+        }
+
+        .track-artist {
+            margin-top: 4px;
+            color: var(--gris);
+            font-size: .75rem;
+        }
+
+        .track-play {
+            display: grid;
+            place-items: center;
+            width: 38px;
+            height: 38px;
+            color: #071009;
+            background: var(--verde);
+            border-radius: 50%;
+            transition: .2s;
+        }
+
+        .track-play:hover {
+            color: #071009;
+            transform: scale(1.1);
+        }
+
+        .track-divider {
+            height: 1px;
+            margin: 0 10px;
+            background: #252c26;
+        }
+
+        .mood-card {
+            height: 100%;
+            padding: 24px;
+            border: 1px solid #29302a;
+            border-radius: 18px;
+            background: var(--panel);
+            transition: .3s;
+        }
+
+        .mood-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--verde);
+        }
+
+        .mood-icon {
+            display: grid;
+            place-items: center;
+            width: 50px;
+            height: 50px;
+            margin-bottom: 20px;
+            color: var(--verde);
+            background: #1c3223;
+            border-radius: 15px;
+            font-size: 1.4rem;
+        }
+
+        .mood-card h3 {
+            font-size: 1.05rem;
+            font-weight: 800;
+        }
+
+        .mood-card p {
+            color: var(--gris);
+            font-size: .85rem;
+            line-height: 1.7;
+        }
+
+        .spotify-embed {
+            width: 100%;
+            min-height: 350px;
+            border: 0;
+            border-radius: 16px;
+            background: #121212;
+        }
+
+        .contact-box {
+            padding: 40px 25px;
+            text-align: center;
+            background:
+                radial-gradient(ellipse at top, #1c4428, transparent 70%),
+                #111512;
+            border: 1px solid #28352b;
+            border-radius: 24px;
+        }
+
+        .contact-box p {
+            color: var(--gris);
+        }
+
+        footer {
+            padding: 30px 0 110px;
+            border-top: 1px solid #252b26;
+            color: var(--gris);
+            font-size: .8rem;
+        }
+
+        .player-bar {
+            position: fixed;
+            z-index: 1000;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 12px 5%;
+            background: rgba(15, 19, 16, .97);
+            border-top: 1px solid #303830;
+            backdrop-filter: blur(15px);
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .player-info img {
+            width: 47px;
+            height: 47px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .player-info strong {
+            display: block;
+            font-size: .8rem;
+        }
+
+        .player-info span {
+            color: var(--gris);
+            font-size: .7rem;
+        }
+
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .player-controls a {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .player-controls .main-play {
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            color: #071009;
+            background: var(--verde);
+            border-radius: 50%;
+        }
+
+        .player-note {
+            color: var(--gris);
+            font-size: .72rem;
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 65px 0 45px;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .section {
+                padding: 45px 0;
+            }
+
+            .playlist-panel {
+                padding: 16px;
+            }
+
+            .player-note {
+                display: none;
+            }
+
+            .player-bar {
+                padding: 10px 14px;
+            }
+
+            .player-controls {
+                gap: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVEGACIÓN -->
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+    <div class="container">
+        <a class="navbar-brand" href="#inicio">
+            <i class="bi bi-soundwave"></i> VIBRA<span>.</span>
+        </a>
+
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#menu"
+                aria-controls="menu" aria-expanded="false"
+                aria-label="Abrir menú">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="#inicio">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#artistas">Artistas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#playlist">Canciones favoritas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#descubre">Descubre</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contacto">Contacto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-verde btn-sm mt-2 mt-lg-0"
+                       href="https://open.spotify.com/" target="_blank"
+                       rel="noopener noreferrer">
+                        <i class="bi bi-spotify"></i> Abrir Spotify
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- PORTADA PRINCIPAL -->
+<header class="hero" id="inicio">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-7">
+                <span class="etiqueta">
+                    <i class="bi bi-stars"></i>
+                    MI ESPACIO MUSICAL
+                </span>
+
+                <h1>
+                    FEEL<br>
+                    THE <span>VIBE.</span>
+                </h1>
+
+                <p class="mt-4">
+                    Cada canción tiene una historia y cada ritmo
+                    un momento. Bienvenido a mi mundo musical:
+                    reggaetón, corridos y pop en una sola playlist.
+                </p>
+
+                <div class="d-flex flex-wrap gap-3 mt-4">
+                    <a class="btn btn-verde"
+                       href="#playlist">
+                        <i class="bi bi-play-fill"></i>
+                        Explorar playlist
+                    </a>
+
+                    <a class="btn btn-outline-light"
+                       href="#artistas">
+                        Mis artistas <i class="bi bi-arrow-down-right"></i>
+                    </a>
+                </div>
+
+                <div class="d-flex gap-4 mt-5">
+                    <div>
+                        <h4 class="fw-bold mb-1">03</h4>
+                        <small class="text-secondary">Artistas favoritos</small>
+                    </div>
+                    <div>
+                        <h4 class="fw-bold mb-1">24/7</h4>
+                        <small class="text-secondary">Modo música</small>
+                    </div>
+                    <div>
+                        <h4 class="fw-bold mb-1">∞</h4>
+                        <small class="text-secondary">Buenas vibras</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="hero-art">
+                    <img
+                        src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=900&q=85"
+                        alt="Concierto con luces y ambiente musical">
+
+                    <div class="art-label">
+                        <small class="text-secondary">EN MI REPEAT</small>
+                        <h4 class="fw-bold mt-1 mb-1">My favorite sounds</h4>
+                        <span class="text-secondary small">
+                            Reggaetón · Corridos · Pop
+                        </span>
+                        <i class="bi bi-soundwave float-end text-success fs-3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- ARTISTAS -->
+<section class="section" id="artistas">
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-between
+                    align-items-end gap-3 mb-4">
+            <div>
+                <span class="playlist-kicker">MIS FAVORITOS</span>
+                <h2 class="section-title mt-2">Artistas que no fallan.</h2>
+                <p class="section-subtitle mb-0">
+                    Tres estilos, una sola playlist.
+                </p>
+            </div>
+            <span class="text-secondary small">
+                <i class="bi bi-vinyl"></i> Mi selección personal
+            </span>
+        </div>
+
+        <div class="row g-4">
+
+            <!-- BAD BUNNY -->
+            <div class="col-md-6 col-lg-4">
+                <a class="artist-card"
+                   href="https://open.spotify.com/search/Bad%20Bunny"
+                   target="_blank" rel="noopener noreferrer">
+                    <img class="artist-img"
+                         src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?auto=format&fit=crop&w=700&q=85"
+                         alt="Concierto de música urbana">
+
+                    <div class="d-flex justify-content-between
+                                align-items-center">
+                        <div>
+                            <h3>Bad Bunny</h3>
+                            <p>Reggaetón · Latin trap</p>
+                        </div>
+                        <span class="mini-link">
+                            <i class="bi bi-spotify fs-3"></i>
+                        </span>
+                    </div>
+                    <span class="mini-link">
+                        Escuchar en Spotify
+                        <i class="bi bi-arrow-up-right"></i>
+                    </span>
+                </a>
+            </div>
+
+            <!-- JUSTIN BIEBER -->
+            <div class="col-md-6 col-lg-4">
+                <a class="artist-card"
+                   href="https://open.spotify.com/search/Justin%20Bieber"
+                   target="_blank" rel="noopener noreferrer">
+                    <img class="artist-img"
+                         src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=700&q=85"
+                         alt="Cantante actuando en un escenario">
+
+                    <div class="d-flex justify-content-between
+                                align-items-center">
+                        <div>
+                            <h3>Justin Bieber</h3>
+                            <p>Pop · R&B</p>
+                        </div>
+                        <span class="mini-link">
+                            <i class="bi bi-spotify fs-3"></i>
+                        </span>
+                    </div>
+                    <span class="mini-link">
+                        Escuchar en Spotify
+                        <i class="bi bi-arrow-up-right"></i>
+                    </span>
+                </a>
+            </div>
+
+            <!-- HERENCIA DE PATRONES -->
+            <div class="col-md-6 col-lg-4">
+                <a class="artist-card"
+                   href="https://open.spotify.com/search/Herencia%20de%20Patrones"
+                   target="_blank" rel="noopener noreferrer">
+                    <img class="artist-img"
+                         src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=700&q=85"
+                         alt="Guitarra en un ambiente musical">
+
+                    <div class="d-flex justify-content-between
+                                align-items-center">
+                        <div>
+                            <h3>Herencia de Patrones</h3>
+                            <p>Regional mexicano · Corridos</p>
+                        </div>
+                        <span class="mini-link">
+                            <i class="bi bi-spotify fs-3"></i>
+                        </span>
+                    </div>
+                    <span class="mini-link">
+                        Escuchar en Spotify
+                        <i class="bi bi-arrow-up-right"></i>
+                    </span>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- PLAYLIST -->
+<section class="section pt-0" id="playlist">
+    <div class="container">
+        <div class="playlist-panel">
+            <div class="row align-items-center g-4 mb-4">
+                <div class="col-md-4 col-lg-3 text-center text-md-start">
+                    <img class="playlist-cover"
+                         src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=600&q=85"
+                         alt="Portada artística de mi playlist">
+                </div>
+
+                <div class="col-md-8 col-lg-9">
+                    <span class="playlist-kicker">PLAYLIST PÚBLICA · CONCEPTO</span>
+                    <h2 class="display-5 fw-bold mt-2">
+                        Mi playlist favorita
+                    </h2>
+                    <p class="text-secondary">
+                        Para cantar, manejar con la familia,
+                        relajarte o ponerle ritmo a tu día.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3 align-items-center">
+                        <a class="btn btn-verde"
+                           href="https://open.spotify.com/"
+                           target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-play-fill"></i> Ir a Spotify
+                        </a>
+                        <span class="text-secondary small">
+                            <i class="bi bi-music-note-list"></i>
+                            Mi selección musical
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center
+                        mb-3 px-2">
+                <h3 class="h5 fw-bold mb-0">Canciones para el repeat</h3>
+                <span class="text-secondary small"># / TRACK</span>
+            </div>
+
+            <!-- CANCIÓN 1 -->
+            <div class="track">
+                <span class="track-number">01</span>
+                <div>
+                    <div class="track-name">Tití Me Preguntó</div>
+                    <div class="track-artist">Bad Bunny</div>
+                </div>
+                <a class="track-play"
+                   href="https://open.spotify.com/search/Titi%20Me%20Pregunto%20Bad%20Bunny"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Buscar Tití Me Preguntó en Spotify">
+                    <i class="bi bi-play-fill"></i>
+                </a>
+            </div>
+            <div class="track-divider"></div>
+
+            <!-- CANCIÓN 2 -->
+            <div class="track">
+                <span class="track-number">02</span>
+                <div>
+                    <div class="track-name">Moscow Mule</div>
+                    <div class="track-artist">Bad Bunny</div>
+                </div>
+                <a class="track-play"
+                   href="https://open.spotify.com/search/Moscow%20Mule%20Bad%20Bunny"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Buscar Moscow Mule en Spotify">
+                    <i class="bi bi-play-fill"></i>
+                </a>
+            </div>
+            <div class="track-divider"></div>
+
+            <!-- CANCIÓN 3 -->
+            <div class="track">
+                <span class="track-number">03</span>
+                <div>
+                    <div class="track-name">Sorry</div>
+                    <div class="track-artist">Justin Bieber</div>
+                </div>
+                <a class="track-play"
+                   href="https://open.spotify.com/search/Sorry%20Justin%20Bieber"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Buscar Sorry en Spotify">
+                    <i class="bi bi-play-fill"></i>
+                </a>
+            </div>
+            <div class="track-divider"></div>
+
+            <!-- CANCIÓN 4 -->
+            <div class="track">
+                <span class="track-number">04</span>
+                <div>
+                    <div class="track-name">Ghost</div>
+                    <div class="track-artist">Justin Bieber</div>
+                </div>
+                <a class="track-play"
+                   href="https://open.spotify.com/search/Ghost%20Justin%20Bieber"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Buscar Ghost en Spotify">
+                    <i class="bi bi-play-fill"></i>
+                </a>
+            </div>
+            <div class="track-divider"></div>
+
+            <!-- CANCIÓN 5 -->
+            <div class="track">
+                <span class="track-number">05</span>
+                <div>
+                    <div class="track-name">Ya No Somos Ni Seremos</div>
+                    <div class="track-artist">Christian Nodal</div>
+                </div>
+                <a class="track-play"
+                   href="https://open.spotify.com/search/Ya%20No%20Somos%20Ni%20Seremos"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Buscar canción en Spotify">
+                    <i class="bi bi-play-fill"></i>
+                </a>
+            </div>
+            <div class="track-divider"></div>
+
+            <!-- CANCIÓN 6 -->
+            <div class="track">
+                <span class="track-number">06</span>
+                <div>
+                    <div class="track-name">Herencia de Patrones</div>
+                    <div class="track-artist">Mis corridos favoritos</div>
+                </div>
+                <a class="track-play"
+                   href="https://open.spotify.com/search/Herencia%20de%20Patrones"
+                   target="_blank" rel="noopener noreferrer"
+                   aria-label="Buscar Herencia de Patrones en Spotify">
+                    <i class="bi bi-play-fill"></i>
+                </a>
+            </div>
+
+            <p class="small text-secondary mt-4 mb-0">
+                <i class="bi bi-info-circle"></i>
+                Las canciones se abren en Spotify para que puedas
+                elegir la versión que prefieras.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- REPRODUCTOR OFICIAL DE SPOTIFY -->
+<section class="section pt-0" id="escucha">
+    <div class="container">
+        <span class="playlist-kicker">DALE PLAY</span>
+        <h2 class="section-title mt-2">Escucha directamente aquí.</h2>
+        <p class="section-subtitle mb-4">
+            Reproductor integrado de Spotify. También puedes abrirlo
+            en la aplicación.
+        </p>
+
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <iframe
+                    class="spotify-embed"
+                    src="https://open.spotify.com/embed/artist/4q3ewBCX7sLwd24euuV69X"
+                    title="Bad Bunny en Spotify"
+                    loading="lazy"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="col-lg-4">
+                <iframe
+                    class="spotify-embed"
+                    src="https://open.spotify.com/embed/artist/1uNFoZAHBGtllmzznpCI3s"
+                    title="Justin Bieber en Spotify"
+                    loading="lazy"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+
+            <div class="col-lg-4">
+                <iframe
+                    class="spotify-embed"
+                    src="https://open.spotify.com/embed/search/Herencia%20de%20Patrones"
+                    title="Búsqueda musical de Herencia de Patrones"
+                    loading="lazy"
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- DESCUBRE -->
+<section class="section pt-0" id="descubre">
+    <div class="container">
+        <span class="playlist-kicker">SOUNDTRACK DE MI VIDA</span>
+        <h2 class="section-title mt-2 mb-4">¿Qué mood traes hoy?</h2>
+
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="mood-card">
+                    <div class="mood-icon">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                    </div>
+                    <h3>Modo fiesta</h3>
+                    <p>
+                        Ritmos urbanos y canciones para subirle
+                        a la energía.
+                    </p>
+                    <a class="mini-link"
+                       href="https://open.spotify.com/search/reggaeton"
+                       target="_blank" rel="noopener noreferrer">
+                        Descubrir música
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mood-card">
+                    <div class="mood-icon">
+                        <i class="bi bi-moon-stars-fill"></i>
+                    </div>
+                    <h3>Modo chill</h3>
+                    <p>
+                        Pop y canciones tranquilas para escuchar
+                        sin prisa.
+                    </p>
+                    <a class="mini-link"
+                       href="https://open.spotify.com/search/pop%20chill"
+                       target="_blank" rel="noopener noreferrer">
+                        Descubrir música
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mood-card">
+                    <div class="mood-icon">
+                        <i class="bi bi-headphones"></i>
+                    </div>
+                    <h3>Modo corridos</h3>
+                    <p>
+                        Sonidos del regional mexicano para cambiar
+                        el ambiente.
+                    </p>
+                    <a class="mini-link"
+                       href="https://open.spotify.com/search/corridos"
+                       target="_blank" rel="noopener noreferrer">
+                        Descubrir música
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section class="section pt-0" id="contacto">
+    <div class="container">
+        <div class="contact-box">
+            <i class="bi bi-chat-heart text-success fs-1"></i>
+            <h2 class="section-title mt-3">¿Compartimos música?</h2>
+            <p class="mx-auto mt-3" style="max-width: 500px;">
+                Siempre hay espacio para una nueva canción favorita.
+                Explora mi selección y encuentra tu próxima rola.
+            </p>
+            <a class="btn btn-verde mt-2"
+               href="https://open.spotify.com/"
+               target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-spotify"></i>
+                Vamos a escuchar
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- PIE DE PÁGINA -->
+<footer>
+    <div class="container d-flex flex-wrap justify-content-between
+                align-items-center gap-3">
+        <a class="navbar-brand" href="#inicio">
+            VIBRA<span>.</span>
+        </a>
+        <span>Proyecto escolar · Playlist favoritas · Bootstrap 5</span>
+        <a class="text-success" href="#inicio">
+            Volver arriba <i class="bi bi-arrow-up"></i>
+        </a>
+    </div>
+</footer>
+
+<!-- BARRA INFERIOR ESTILO REPRODUCTOR -->
+<div class="player-bar">
+    <div class="player-info">
+        <img
+            src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=120&q=80"
+            alt="Portada musical">
+        <div>
+            <strong>Mi playlist favorita</strong>
+            <span>VIBRA · Tus sonidos</span>
+        </div>
+    </div>
+
+    <div class="player-controls">
+        <a href="#playlist" aria-label="Ver canciones">
+            <i class="bi bi-skip-start-fill"></i>
+        </a>
+        <a class="main-play"
+           href="https://open.spotify.com/"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Abrir Spotify">
+            <i class="bi bi-play-fill"></i>
+        </a>
+        <a href="#escucha" aria-label="Ver reproductores">
+            <i class="bi bi-skip-end-fill"></i>
+        </a>
+    </div>
+
+    <div class="player-note">
+        <i class="bi bi-spotify"></i> Escucha tus favoritos
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
